@@ -8,14 +8,12 @@ MEMORY
 
 SECTIONS
 {
-  /* .isr_vector :
-  {
-    KEEP(*(.isr_vector));
-    . = ALIGN(4);
-  } > FLASH */
-
   .text :
   {
+    KEEP(*(.isr_vector))
+    . = ALIGN(4);
+    *(.init)
+    *(.fini)
     *(.text)
     *(.text.*)
     *(fastcall)
@@ -23,6 +21,7 @@ SECTIONS
     . = ALIGN(4);
     *(.rodata)
     *(.rodata.*)
+    *(.constdata)
     . = ALIGN(4);
     _etext = .;
   } > FLASH
@@ -32,6 +31,10 @@ SECTIONS
     _sdata = .;
     *(.data)
     *(.data.*)
+    *(.init_array)
+    *(.init_array.*)
+    *(.fini_array)
+    *(.data__*)
     . = ALIGN(4);
     _edata = .;
   } > SRAM AT> FLASH
@@ -52,11 +55,10 @@ SECTIONS
 
   .stack :
   {
-    . = ORIGIN(SRAM) + LENGTH(SRAM) - 1;
-    _irq_stack_top = .;
+    _past_eosram = ORIGIN(SRAM) + LENGTH(SRAM);
+    _irq_stack_top = _past_eosram - 4;
     _fiq_stack_top = _irq_stack_top - 512;
     _svc_stack_top = _fiq_stack_top - 1024;
-    _usr_stack_top = _svc_stack_top - 2048;
-    _sys_stack_top = _usr_stack_top - 16;
+    _sys_stack_top = _svc_stack_top - 2048;
   } > SRAM
 }

@@ -5,7 +5,7 @@ set(CMAKE_SYSTEM_NAME Generic)
 set(CMAKE_SYSTEM_PROCESSOR arm)
 SET(CMAKE_CROSSCOMPILING 1)
 
-project(BK3431S_SDK VERSION 0.1.0)
+project(BK3431S_SDK VERSION 0.1.0 LANGUAGES C ASM)
 
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
@@ -16,7 +16,7 @@ list(FILTER Include INCLUDE REGEX "include")
 
 add_compile_definitions(__USE_INLINES__)
 
-add_executable(fw ${Src})
+add_executable(fw ${Src} "src/bootstrap.S")
 target_include_directories(fw PUBLIC ${Include})
 target_link_libraries(fw PRIVATE "${CMAKE_SOURCE_DIR}/lib/BK3231S_LIB.lib" "m")
 set_target_properties(fw PROPERTIES LINK_DEPENDS "${CMAKE_SOURCE_DIR}/BK3431S.ld")
