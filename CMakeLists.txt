@@ -20,6 +20,10 @@ add_executable(fw ${Src} "src/bootstrap.S")
 target_include_directories(fw PUBLIC ${Include})
 target_link_libraries(fw PRIVATE "${CMAKE_SOURCE_DIR}/lib/BK3231S_LIB.lib" "m")
 set_target_properties(fw PROPERTIES LINK_DEPENDS "${CMAKE_SOURCE_DIR}/BK3431S.ld")
+add_custom_command(
+    TARGET fw POST_BUILD
+    COMMAND ${CMAKE_OBJCOPY} ARGS -O binary $<TARGET_FILE:fw> $<TARGET_FILE:fw>.bin
+    COMMAND python3 ARGS "${CMAKE_SOURCE_DIR}/prepare_image.py" $<TARGET_FILE:fw>.bin $<TARGET_FILE:fw>.img "${CMAKE_SOURCE_DIR}/config.bin")
 
 SET(CMAKE_C_FLAGS "-w -march=ARMv5TE -fshort-wchar ${CMAKE_C_FLAGS}")
 SET(CMAKE_EXE_LINKER_FLAGS "--specs=nosys.specs -fshort-wchar -T ${CMAKE_SOURCE_DIR}/BK3431S.ld ${CMAKE_EXE_LINKER_FLAGS}")
