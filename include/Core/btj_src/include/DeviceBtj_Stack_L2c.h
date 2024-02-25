@@ -89,7 +89,7 @@ typedef enum
 #elif defined(ARM_PLATFORM)
 #pragma pack(1)
 #endif
-typedef __packed struct _L2C_CONTEXT_T
+typedef struct __packed _L2C_CONTEXT_T
 {
     BTBYTE l2c_dir;
     BTWORD l2c_psm;
@@ -101,19 +101,19 @@ typedef __packed struct _L2C_CONTEXT_T
     BTBYTE l2c_conf_state;
     HCI_CONTEXT_P hci_context;
 } L2C_CONTEXT_T, *L2C_CONTEXT_P;
-typedef __packed struct _L2C_HEADERS_T
+typedef struct __packed _L2C_HEADERS_T
 {
     BTWORD l2c_length;
     BTWORD l2c_chan;
 } L2C_HEADERS_T, *L2C_HEADERS_P;
-typedef __packed struct _L2C_REJECT_REQ_T
+typedef struct __packed _L2C_REJECT_REQ_T
 {
     BTBYTE signal_code;
     BTBYTE signal_iden;
     BTWORD signal_length;
     BTBYTE packet_reason;
 } L2C_REJECT_REQ_T, *L2C_REJECT_REQ_P;
-typedef __packed struct _L2C_CONNECT_REQ_T
+typedef struct __packed _L2C_CONNECT_REQ_T
 {
     BTBYTE signal_code;
     BTBYTE signal_iden;
@@ -121,7 +121,7 @@ typedef __packed struct _L2C_CONNECT_REQ_T
     BTWORD packet_psm;
     BTWORD packet_scid;
 } L2C_CONNECT_REQ_T, *L2C_CONNECT_REQ_P;
-typedef __packed struct _L2C_CONNECT_RSP_T
+typedef struct __packed _L2C_CONNECT_RSP_T
 {
     BTBYTE signal_code;
     BTBYTE signal_iden;
@@ -131,7 +131,7 @@ typedef __packed struct _L2C_CONNECT_RSP_T
     BTWORD packet_result;
     BTWORD packet_status;
 } L2C_CONNECT_RSP_T, *L2C_CONNECT_RSP_P;
-typedef __packed struct _L2C_CONFIGURE_REQ_T
+typedef struct __packed _L2C_CONFIGURE_REQ_T
 {
     BTBYTE signal_code;
     BTBYTE signal_iden;
@@ -145,7 +145,7 @@ typedef __packed struct _L2C_CONFIGURE_REQ_T
    // BTBYTE option_length_two;
    // BTWORD option_option_two;
 } L2C_CONFIGURE_REQ_T, *L2C_CONFIGURE_REQ_P;
-typedef __packed struct _L2C_CONFIGURE_RSP_T
+typedef struct __packed _L2C_CONFIGURE_RSP_T
 {
     BTBYTE signal_code;
     BTBYTE signal_iden;
@@ -160,7 +160,7 @@ typedef __packed struct _L2C_CONFIGURE_RSP_T
    // BTBYTE option_length_two;
    // BTWORD option_option_two;
 } L2C_CONFIGURE_RSP_T, *L2C_CONFIGURE_RSP_P;
-typedef __packed struct _L2C_DISCONNECT_REQ_T
+typedef struct __packed _L2C_DISCONNECT_REQ_T
 {
     BTBYTE signal_code;
     BTBYTE signal_iden;
@@ -168,7 +168,7 @@ typedef __packed struct _L2C_DISCONNECT_REQ_T
     BTWORD packet_dcid;
     BTWORD packet_scid;
 } L2C_DISCONNECT_REQ_T, *L2C_DISCONNECT_REQ_P;
-typedef __packed struct _L2C_DISCONNECT_RSP_T
+typedef struct __packed _L2C_DISCONNECT_RSP_T
 {
     BTBYTE signal_code;
     BTBYTE signal_iden;
@@ -176,26 +176,26 @@ typedef __packed struct _L2C_DISCONNECT_RSP_T
     BTWORD packet_dcid;
     BTWORD packet_scid;
 } L2C_DISCONNECT_RSP_T, *L2C_DISCONNECT_RSP_P;
-typedef __packed struct _L2C_ECHO_REQ_T
+typedef struct __packed _L2C_ECHO_REQ_T
 {
     BTBYTE signal_code;
     BTBYTE signal_iden;
     BTWORD signal_length;
 } L2C_ECHO_REQ_T, *L2C_ECHO_REQ_P;
-typedef __packed struct _L2C_ECHO_RSP_T
+typedef struct __packed _L2C_ECHO_RSP_T
 {
     BTBYTE signal_code;
     BTBYTE signal_iden;
     BTWORD signal_length;
 } L2C_ECHO_RSP_T, *L2C_ECHO_RSP_P;
-typedef __packed struct _L2C_INFO_REQ_T
+typedef struct __packed _L2C_INFO_REQ_T
 {
     BTBYTE signal_code;
     BTBYTE signal_iden;
     BTWORD signal_length;
     BTWORD packet_infotype;
 } L2C_INFO_REQ_T, *L2C_INFO_REQ_P;
-typedef __packed struct _L2C_INFO_RSP_T
+typedef struct __packed _L2C_INFO_RSP_T
 {
     BTBYTE signal_code;
     BTBYTE signal_iden;

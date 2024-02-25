@@ -18,6 +18,7 @@
 #include "sys_config.h"
 #include "sys_types.h"
 #include "sys_const.h"
+#include "sys_irq.h"
 
 #include "hw_delay.h"
 #include "uslc_chan_ctrl.h"

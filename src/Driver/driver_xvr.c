@@ -2,7 +2,6 @@
 
 volatile uint32 *p_APB_XVER_ADDR   = (volatile uint32*)  APB_XVER_BASE ;
 volatile uint32 XVR_ANALOG_REG_BAK[16]={0};
-extern void delay_ms(unsigned int tt);
 void kmod_calibration(void) 
 {
 	uint32 value;

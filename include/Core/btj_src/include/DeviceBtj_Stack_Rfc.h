@@ -71,7 +71,7 @@ typedef enum
 #elif defined(ARM_PLATFORM)
 #pragma pack(1)
 #endif
-typedef __packed struct _RFC_CONTEXT_T
+typedef struct __packed _RFC_CONTEXT_T
 {
     BTBOOL rfc_init;
     BTBYTE rfc_ua;
@@ -82,34 +82,34 @@ typedef __packed struct _RFC_CONTEXT_T
     L2C_CONTEXT_P       l2c_context;
     DEVICEBTJ_SERVICE_P app_service_header;
 } RFC_CONTEXT_T, *RFC_CONTEXT_P;
-typedef __packed struct _RFC_FRA_ADDRESS
+typedef struct __packed _RFC_FRA_ADDRESS
 {
     BITBYTE AddrEa                 :1;
     BITBYTE AddrCr                 :1;
     BITBYTE AddrDi                 :1;
     BITBYTE AddrSc                 :5;
 } RFC_FRA_ADDRESS, *PRFC_FRA_ADDRESS;
-typedef __packed struct _RFC_FRA_CONTROL
+typedef struct __packed _RFC_FRA_CONTROL
 {
     BTBYTE Control;
 } RFC_FRA_CONTROL, *PRFC_FRA_CONTROL;
-typedef __packed struct _RFC_FRA_LENGTH_BYTE
+typedef struct __packed _RFC_FRA_LENGTH_BYTE
 {
     BITBYTE LengthEa               :1;
     BITBYTE LengthValue            :7;
 } RFC_FRA_LENGTH_BYTE, *PRFC_FRA_LENGTH_BYTE;
-typedef __packed struct _RFC_FRA_LENGTH_WORD
+typedef struct __packed _RFC_FRA_LENGTH_WORD
 {
     BITWORD LengthEa               :1;
     BITWORD LengthValue            :15;
 } RFC_FRA_LENGTH_WORD, *PRFC_FRA_LENGTH_WORD;
-typedef __packed struct _RFC_MSG_TYPE_BYTE
+typedef struct __packed _RFC_MSG_TYPE_BYTE
 {
     BITBYTE HeadEa                 :1;
     BITBYTE HeadCr                 :1;
     BITBYTE HeadType               :6;
 } RFC_MSG_TYPE_BYTE, *PRFC_MSG_TYPE_BYTE;
-typedef __packed struct _RFC_MSG_TYPE_WORD
+typedef struct __packed _RFC_MSG_TYPE_WORD
 {
     BITBYTE HeadEa                 :1;
     BITBYTE HeadCr                 :1;
@@ -117,25 +117,25 @@ typedef __packed struct _RFC_MSG_TYPE_WORD
     BITBYTE TailEA                 :1;
     BITBYTE TailType               :7;
 } RFC_MSG_TYPE_WORD, *PRFC_MSG_TYPE_WORD;
-typedef __packed struct _RFC_MSG_LENGTH_BYTE
+typedef struct __packed _RFC_MSG_LENGTH_BYTE
 {
     BITBYTE HeadEa                 :1;
     BITBYTE HeadLength             :7;
 } RFC_MSG_LENGTH_BYTE, *PRFC_MSG_LENGTH_BYTE;
-typedef __packed struct _RFC_MSG_LENGTH_WORD
+typedef struct __packed _RFC_MSG_LENGTH_WORD
 {
     BITBYTE HeadEa                 :1;
     BITBYTE HeadLength             :7;
     BITBYTE TailEa                 :1;
     BITBYTE TailLength             :7;
 } RFC_MSG_LENGTH_WORD, *PRFC_MSG_LENGTH_WORD;
-typedef __packed struct _RFC_MSG_PN_DLCI
+typedef struct __packed _RFC_MSG_PN_DLCI
 {
     BITBYTE PnDlciDi                :1;
     BITBYTE PnDlciSc                :5;
     BITBYTE PnDlciRes               :2;
 } RFC_MSG_PN_DLCI, *PRFC_MSG_PN_DLCI;
-typedef __packed struct _RFC_FRA_HEADER
+typedef struct __packed _RFC_FRA_HEADER
 {
     RFC_FRA_ADDRESS Address;
     RFC_FRA_CONTROL Control;

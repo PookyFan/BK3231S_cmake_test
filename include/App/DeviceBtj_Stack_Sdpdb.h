@@ -95,13 +95,13 @@
 #elif defined(ARM_PLATFORM)
 #pragma pack(1)
 #endif
-typedef __packed struct _SDP_DB_ATTRIBUTE_T
+typedef struct __packed _SDP_DB_ATTRIBUTE_T
 {
     BTWORD  id;
     BTPBYTE string;
     BTBYTE  length;
 } SDP_DB_ATTRIBUTE_T, *SDP_DB_ATTRIBUTE_P;
-typedef __packed struct _SDP_DATBASE_T
+typedef struct __packed _SDP_DATBASE_T
 {
     BTBOOL  busy;
     BTWORD  uuid;
@@ -111,7 +111,7 @@ typedef __packed struct _SDP_DATBASE_T
     BTBYTE  counts;
     struct _SDP_DB_ATTRIBUTE_T *attrib;
 } SDP_DATBASE_T, *SDP_DATBASE_P;
-typedef __packed struct _SDP_DATABASE_LIST_T
+typedef struct __packed _SDP_DATABASE_LIST_T
 {
     struct _SDP_DATBASE_T *base;
     struct _SDP_DATABASE_LIST_T *next;

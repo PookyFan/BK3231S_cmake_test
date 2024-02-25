@@ -8,7 +8,7 @@
 #elif defined(ARM_PLATFORM)
 #pragma pack(1)
 #endif
-typedef __packed struct _HCI_COMMON_T
+typedef struct __packed _HCI_COMMON_T
 {
     BTBYTE  hci_packet;
     BITWORD hci_handle: 12;

@@ -1,6 +1,6 @@
 
 #include "include.h"
-
+#include "sys_irq.h"
 
 
 #define GD_FLASH_1	0XC84013
@@ -168,7 +168,7 @@ void fflash_wr_protect_16k( void )
 		case BY25Q80:
 		case PN25f04:
 		default:
-			flash_write_sr( 2, 0x0024 );// 64KÓÐÎÊÌâ£¬16K ¿ÉÒÔ
+			flash_write_sr( 2, 0x0024 );// 64Kï¿½ï¿½ï¿½ï¿½ï¿½â£¬16K ï¿½ï¿½ï¿½ï¿½
 			break;
 	}
 }
@@ -322,10 +322,10 @@ void set_flash_qe(void)
 {
 	unsigned int temp0;
 	while(REG_FLASH_OPERATE_SW & 0x80000000){;}
-//XTX_FLASH_1 Ã»ÓÐQE,²»ÐèÒª,¿¿ EQPI(38h) CMD À´´¦Àí
-//Õâ¸ö½ö¶ÔMX_FLASH_1 ¡¢MX_FLASH_4M¡¢XTX_FLASH_1ÓÐÐ§¡£
+//XTX_FLASH_1 Ã»ï¿½ï¿½QE,ï¿½ï¿½ï¿½ï¿½Òª,ï¿½ï¿½ EQPI(38h) CMD ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½MX_FLASH_1 ï¿½ï¿½MX_FLASH_4Mï¿½ï¿½XTX_FLASH_1ï¿½ï¿½Ð§ï¿½ï¿½
 
-	temp0 = REG_FLASH_CONF; //ÅäÖÃWRSR Status data
+	temp0 = REG_FLASH_CONF; //ï¿½ï¿½ï¿½ï¿½WRSR Status data
 
 	if(flash_mid == XTX_FLASH_1)  // wanghong
 		return;
@@ -367,14 +367,14 @@ void set_flash_qe(void)
 
 static void set_flash_qwfr(void)
 {
-//Ö»²Ù×÷ MCU,²»²Ù×÷ SR£¬²»ÓÃÐ´ REG_FLASH_OPERATE_SW
+//Ö»ï¿½ï¿½ï¿½ï¿½ MCU,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ SRï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð´ REG_FLASH_OPERATE_SW
     unsigned int temp0,mod_sel;
     temp0 = REG_FLASH_CONF;
 	mod_sel = temp0 & (0xC << BIT_MODE_SEL); 
 	mod_sel |= (0x2 << BIT_MODE_SEL);
     while(REG_FLASH_OPERATE_SW & 0x80000000);
     REG_FLASH_CONF = (  (temp0 &  SET_FLASH_CLK_CONF)
-                      |  mod_sel  //QWFRÅäÖÃËÄÏßMODE use QWFR to fetch data. For GigaDevice (GD) Flash
+                      |  mod_sel  //QWFRï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½MODE use QWFR to fetch data. For GigaDevice (GD) Flash
                       | (temp0 &  SET_FWREN_FLASH_CPU)
                       | (temp0 & SET_WRSR_DATA)
                       | (temp0 &  SET_CRC_EN));
@@ -388,7 +388,7 @@ void clr_flash_qwfr(void)
     temp0 = REG_FLASH_CONF;
 
     while(REG_FLASH_OPERATE_SW & 0x80000000){}
-    mod_sel = temp0 & (0xC << BIT_MODE_SEL); //Çå³ýmode_selÖÐµÄµÍÁ½Î»Ä£Ê½Ñ¡Ôñ ±£³ÖµÚÈýµÚËÄÎ»
+    mod_sel = temp0 & (0xC << BIT_MODE_SEL); //ï¿½ï¿½ï¿½mode_selï¿½ÐµÄµï¿½ï¿½ï¿½Î»Ä£Ê½Ñ¡ï¿½ï¿½ ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»
     mod_sel |= (0x1 << BIT_MODE_SEL);
     REG_FLASH_CONF = (  (temp0 &  SET_FLASH_CLK_CONF)
                       | mod_sel
@@ -452,15 +452,15 @@ void flash_set_line_mode(uint8 mode)
     else if (mode == 4)
     {
         //set_flash_qe();
-        set_flash_qwfr();/**< 4Ïß´ò¿ª */
+        set_flash_qwfr();/**< 4ï¿½ß´ï¿½ */
     }
     SYSirq_Interrupts_Restore_Flags(cpu_flags);
 }
 #else
  {
-//XTX_FLASH_1 Ã»ÓÐ QE£¬²»ÐèÒª£¬¿¿ EQPI(38h) CMD À´´¦Àí
-//Õâ¸ö½ö¶ÔMX_FLASH_1 ¡¢MX_FLASH_4M¡¢XTX_FLASH_1ÓÐÐ§¡£
-//µ«»¹ÊÇÒªÐ´ÏÂ XTX_FLASH_1 µÄÎ»ÖÃ£¬ÒòÎª³ÌÐò»á¶Áqe×´Ì¬¡£
+//XTX_FLASH_1 Ã»ï¿½ï¿½ QEï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ EQPI(38h) CMD ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½MX_FLASH_1 ï¿½ï¿½MX_FLASH_4Mï¿½ï¿½XTX_FLASH_1ï¿½ï¿½Ð§ï¿½ï¿½
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÒªÐ´ï¿½ï¿½ XTX_FLASH_1 ï¿½ï¿½Î»ï¿½Ã£ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½qe×´Ì¬ï¿½ï¿½
 
 	uint32 temp0 = 0;
 	uint32 cpu_flags;
@@ -608,7 +608,7 @@ uint8 readLinkNum(void)
 		dataBuffer[2] = 0;
 		reval = 0;
 		config_buff[271] = 0;//1bit stop
-		config_buff[272] = 0;//no ÆæÅ¼Ð£ÑéÎ»
+		config_buff[272] = 0;//no ï¿½ï¿½Å¼Ð£ï¿½ï¿½Î»
 		
 		flash_erase_sector(0x40000);
 		flash_erase_sector(0x41000);
@@ -636,14 +636,14 @@ void writeLinkNum(uint8 num)
 	uint8 state = 0;
 	uint8 i, j, k = 0;
 	uint8 dataBuffer[32] = {0};
-	uint8 data[160] = {0};	//»º´æÁ¬½ÓÊý¾Ý
+	uint8 data[160] = {0};	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	
 	flash_set_line_mode(1);
 	
 	flash_read_data(dataBuffer, 0x41000, 32);
-	Btnum = dataBuffer[0];	//ÒÑÁ¬½ÓÀ¶ÑÀµÄ¸öÊý
-	lnum = dataBuffer[1];	//linkkey´æ´¢µÄÎ»ÖÃ
-	state = dataBuffer[2];	//µ±Ç°Á¬½ÓµÄÉè±¸µÄ±àºÅÎ»ÖÃ
+	Btnum = dataBuffer[0];	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¸ï¿½ï¿½ï¿½
+	lnum = dataBuffer[1];	//linkkeyï¿½æ´¢ï¿½ï¿½Î»ï¿½ï¿½
+	state = dataBuffer[2];	//ï¿½ï¿½Ç°ï¿½ï¿½ï¿½Óµï¿½ï¿½è±¸ï¿½Ä±ï¿½ï¿½Î»ï¿½ï¿½
 
 	for(i = 0; i < Btnum; i++)
 	{
@@ -729,7 +729,7 @@ void writeBtLinkInfo(uint8 *pAddr, uint8 num)
 
 	flash_erase_sector(0x41000);
 
-	if(num >= Btnum)	//ÐÂµÄÎ´Á¬½Ó¹ýµÄBTÉè±¸
+	if(num >= Btnum)	//ï¿½Âµï¿½Î´ï¿½ï¿½ï¿½Ó¹ï¿½ï¿½ï¿½BTï¿½è±¸
 	{
 		if(Btnum < 4)
 			Btnum += 1;

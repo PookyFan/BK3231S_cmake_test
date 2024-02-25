@@ -34,7 +34,14 @@
 #include "sys_config.h"
 #include "tra_uart.h"
 
+//todo: put these declarations into header file
+void readBtLinkInfo(uint8 *pAddr, uint8 num);
+void writeLinkNum(uint8 num);
+void writeBtLinkInfo(uint8 *pAddr, uint8 num);
 
+void uart_callback(volatile char * buff, u_int16 len);
+
+void SPI_transmit_data(unsigned char *tx_data, unsigned char *rx_data, unsigned char len);
  
 static DEVICEBTJ_SERVICE_T spp_service;
 static DEVICEBTJ_SERVICE_T hid_service;
@@ -65,7 +72,7 @@ u_int8 key_num[10]      = {0xa1,0x01,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
 
 
 
-void delay_ms(unsigned int tt)
+void __attribute__((optimize("O0"))) delay_ms(unsigned int tt)
 {
     unsigned int i,j;
     while(tt--)
@@ -439,7 +446,7 @@ DeviceBtj_Event(
 )
 {
     unsigned char i,j;
-	unsigned char comm_table[26];
+	unsigned char comm_table[32];
     ENV_CONFIG_P config=(ENV_CONFIG_P)env_config_buff;
             
     switch (MsgEvent)
@@ -1042,10 +1049,9 @@ void FAST_CALL Host_Loop()
 		{
 			uint8 i;
 			spiCount = 0;
-			
-			/* get device ID */
-			SPI_transmit_data(spi_tx_data, spi_rx_data, 1);
 
+			/* get device ID */
+			SPI_transmit_data((unsigned char *)spi_tx_data, (unsigned char *)spi_rx_data, 1);
 			#if 0//DEBUG
 			bprintf("data=%x\n", spi_rx_data[0]);
 			#endif
@@ -1054,7 +1060,7 @@ void FAST_CALL Host_Loop()
 			if(spi_rx_data[0] == 0x31)
 			{
 				/* get spi data length */
-				SPI_transmit_data(spi_tx_data, spi_rx_data, 1);
+				SPI_transmit_data((unsigned char *)spi_tx_data, (unsigned char *)spi_rx_data, 1);
 				spi_rx_buff_len = spi_rx_data[0];
 
 				#if 0//DEBUG
@@ -1064,7 +1070,7 @@ void FAST_CALL Host_Loop()
 				if(spi_rx_buff_len)
 				{
 					/* get spi data load */
-					SPI_transmit_data(spi_tx_data, spi_rx_data, spi_rx_buff_len);
+					SPI_transmit_data((unsigned char *)spi_tx_data, (unsigned char *)spi_rx_data, spi_rx_buff_len);
 					spi_send_cnt = 1;
 
 					#if DEBUG
@@ -1127,7 +1133,7 @@ void FAST_CALL Host_Loop()
 			}
 			else if(spi_send_cnt)//����spi����
 			{
-				if(DeviceRfc_Send(&btj_adapter, &spp_service, spi_rx_data, spi_rx_buff_len))
+				if(DeviceRfc_Send(&btj_adapter, &spp_service, (BTPBYTE)spi_rx_data, spi_rx_buff_len))
 				{
 					spi_send_cnt = 0;
 				}
@@ -1292,7 +1298,7 @@ void FAST_CALL Host_Loop()
 */
 static uint8 getATCommand(uint8 *pCommand)
 {
-	uint8 atData[4] = {0};
+	uint8 atData[5] = {0};
 	
 	memcpy(atData, pCommand, 4);
 
@@ -1399,13 +1405,13 @@ static void getCommandData(uint8 *pbuf)
 			            config->uart_baudrate = 7;  
 						baudbuf = 115200;
 			            break;
-			        case 128000:
-			            config->uart_baudrate = 8;
-						//baudbuf = 2400;
-			            break;
-			        case 256000:
-			            config->uart_baudrate = 9;
-			            break;
+			        // case 128000:
+			        //     config->uart_baudrate = 8;
+					// 	//baudbuf = 2400;
+			        //     break;
+			        // case 256000:
+			        //     config->uart_baudrate = 9;
+			        //     break;
 			        case 'B':
 			            config->uart_baudrate = 10;   
 						baudbuf = 921600;

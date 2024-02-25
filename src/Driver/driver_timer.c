@@ -7,6 +7,8 @@
 //                Source from BK3231  firmware: bk3000_timer.c
 //======================================================
 #include "include.h"
+#include "lslc_slot.h"
+
 intr_callback  g_bk_timer_func[3];
 
 volatile uint8 bk_timer_hit=0x00;

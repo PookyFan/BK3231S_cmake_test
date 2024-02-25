@@ -61,7 +61,7 @@ void flash_write_data (uint8 *buffer, uint32 address, uint32 len);
 void GD25Q41_init(void);
 void flash_erase_sector(uint32 address);// for warning messge change
 uint8 flash_read_qe(void);
-
+uint8 readLinkNum(void);
 
 uint8 read_lmecc_pointq_status(void);
 #endif

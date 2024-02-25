@@ -355,13 +355,13 @@
 #elif defined(ARM_PLATFORM)
 #pragma pack(1)
 #endif
-typedef __packed struct _HCI_STRUCT_COMMON_T
+typedef struct __packed _HCI_STRUCT_COMMON_T
 {
     BTCHAR       packet;
     BTWORD       opcode;
     BTBYTE       length;
 } HCI_STRUCT_COMMON_T, *HCI_STRUCT_COMMON_P;
-typedef __packed struct _HCI_STRUCT_INQUIRY_T
+typedef struct __packed _HCI_STRUCT_INQUIRY_T
 {
     BTCHAR       packet;
     BTWORD       opcode;
@@ -370,13 +370,13 @@ typedef __packed struct _HCI_STRUCT_INQUIRY_T
     BTBYTE       param_length;
     BTBYTE       param_response;
 } HCI_STRUCT_INQUIRY_T, *HCI_STRUCT_INQUIRY_P;
-typedef __packed struct _HCI_STRUCT_INQUIRY_CANCEL_T
+typedef struct __packed _HCI_STRUCT_INQUIRY_CANCEL_T
 {
     BTCHAR       packet;
     BTWORD       opcode;
     BTBYTE       length;
 } HCI_STRUCT_INQUIRY_CANCEL_T, *HCI_STRUCT_INQUIRY_CANCEL_P;
-typedef __packed struct _HCI_STRUCT_CONNECT_T
+typedef struct __packed _HCI_STRUCT_CONNECT_T
 {
     BTCHAR       packet;
     BTWORD       opcode;
@@ -388,14 +388,14 @@ typedef __packed struct _HCI_STRUCT_CONNECT_T
     BTWORD       param_clock_offset;
     BTBYTE       param_allow_role_switch;
 } HCI_STRUCT_CONNECT_T, *HCI_STRUCT_CONNECT_P;
-typedef __packed struct _HCI_STRUCT_CONNECT_CANCEL_T
+typedef struct __packed _HCI_STRUCT_CONNECT_CANCEL_T
 {
     BTCHAR       packet;
     BTWORD       opcode;
     BTBYTE       length;
     DEV_MEM_ADDR param_dev_mem_addr;
 } HCI_STRUCT_CONNECT_CANCEL_T, *HCI_STRUCT_CONNECT_CANCEL_P;
-typedef __packed struct _HCI_STRUCT_DISCONNECT_T
+typedef struct __packed _HCI_STRUCT_DISCONNECT_T
 {
     BTCHAR       packet;
     BTWORD       opcode;
@@ -403,7 +403,7 @@ typedef __packed struct _HCI_STRUCT_DISCONNECT_T
     BTWORD       param_handle;
     BTBYTE       param_reason;
 } HCI_STRUCT_DISCONNECT_T, *HCI_STRUCT_DISCONNECT_P;
-typedef __packed struct _HCI_STRUCT_ACCEPT_CONNECTION_T
+typedef struct __packed _HCI_STRUCT_ACCEPT_CONNECTION_T
 {
     BTCHAR       packet;
     BTWORD       opcode;
@@ -411,7 +411,7 @@ typedef __packed struct _HCI_STRUCT_ACCEPT_CONNECTION_T
     DEV_MEM_ADDR param_dev_mem_addr;
     BTBYTE       param_role;
 } HCI_STRUCT_ACCEPT_CONNECTION_T, *HCI_STRUCT_ACCEPT_CONNECTION_P;
-typedef __packed struct _HCI_STRUCT_REJECT_CONNECTION_T
+typedef struct __packed _HCI_STRUCT_REJECT_CONNECTION_T
 {
     BTCHAR       packet;
     BTWORD       opcode;
@@ -419,7 +419,7 @@ typedef __packed struct _HCI_STRUCT_REJECT_CONNECTION_T
     DEV_MEM_ADDR param_dev_mem_addr;
     BTBYTE       param_reason;
 } HCI_STRUCT_REJECT_CONNECTION_T, *HCI_STRUCT_REJECT_CONNECTION_P;
-typedef __packed struct _HCI_STRUCT_LINK_KEY_REPLY_T
+typedef struct __packed _HCI_STRUCT_LINK_KEY_REPLY_T
 {
     BTCHAR       packet;
     BTWORD       opcode;
@@ -427,14 +427,14 @@ typedef __packed struct _HCI_STRUCT_LINK_KEY_REPLY_T
     DEV_MEM_ADDR param_dev_mem_addr;
     DEV_LINK_KEY param_linkkey;
 } HCI_STRUCT_LINK_KEY_REPLY_T, *HCI_STRUCT_LINK_KEY_REPLY_P;
-typedef __packed struct _HCI_STRUCT_LINK_KEY_NEGATIVE_REPLY_T
+typedef struct __packed _HCI_STRUCT_LINK_KEY_NEGATIVE_REPLY_T
 {
     BTCHAR       packet;
     BTWORD       opcode;
     BTBYTE       length;
     DEV_MEM_ADDR param_dev_mem_addr;
 } HCI_STRUCT_LINK_KEY_NEGATIVE_REPLY_T, *HCI_STRUCT_LINK_KEY_NEGATIVE_REPLY_P;
-typedef __packed struct _HCI_STRUCT_PIN_CODE_REPLY_T
+typedef struct __packed _HCI_STRUCT_PIN_CODE_REPLY_T
 {
     BTCHAR       packet;
     BTWORD       opcode;
@@ -447,7 +447,7 @@ typedef __packed struct _HCI_STRUCT_PIN_CODE_REPLY_T
 
 
 
-typedef __packed struct _HCI_STRUCT_PIN_CODE_NEGATIVE_REPLY_T
+typedef struct __packed _HCI_STRUCT_PIN_CODE_NEGATIVE_REPLY_T
 {
     BTCHAR       packet;
     BTWORD       opcode;
@@ -455,7 +455,7 @@ typedef __packed struct _HCI_STRUCT_PIN_CODE_NEGATIVE_REPLY_T
     DEV_MEM_ADDR param_dev_mem_addr;
 } HCI_STRUCT_PIN_CODE_NEGATIVE_REPLY_T, *HCI_STRUCT_PIN_CODE_NEGATIVE_REPLY_P;
 
-typedef __packed struct _HCI_STRUCT_REMOTE_NAME_REQUEST_T
+typedef struct __packed _HCI_STRUCT_REMOTE_NAME_REQUEST_T
 {
     BTCHAR       packet;
     BTWORD       opcode;
@@ -465,21 +465,21 @@ typedef __packed struct _HCI_STRUCT_REMOTE_NAME_REQUEST_T
     BTBYTE       param_reversed;
     BTWORD       param_clock_offset;
 } HCI_STRUCT_REMOTE_NAME_REQUEST_T, *HCI_STRUCT_REMOTE_NAME_REQUEST_P;
-typedef __packed struct _HCI_STRUCT_REMOTE_NAME_REQUEST_CANCEL_T
+typedef struct __packed _HCI_STRUCT_REMOTE_NAME_REQUEST_CANCEL_T
 {
     BTCHAR       packet;
     BTWORD       opcode;
     BTBYTE       length;
     DEV_MEM_ADDR param_dev_mem_addr;
 } HCI_STRUCT_REMOTE_NAME_REQUEST_CANCEL_T, *HCI_STRUCT_REMOTE_NAME_REQUEST_CANCEL_P;
-typedef __packed struct _HCI_STRUCT_REMOTE_SUPPORTED_FEATURE_T
+typedef struct __packed _HCI_STRUCT_REMOTE_SUPPORTED_FEATURE_T
 {
     BTCHAR       packet;
     BTWORD       opcode;
     BTBYTE       length;
     BTWORD       param_handle;
 } HCI_STRUCT_REMOTE_SUPPORTED_FEATURE_T, *HCI_STRUCT_REMOTE_SUPPORTED_FEATURE_P;
-typedef __packed struct _HCI_STRUCT_REMOTE_EXTENDED_FEATURE_T
+typedef struct __packed _HCI_STRUCT_REMOTE_EXTENDED_FEATURE_T
 {
     BTCHAR       packet;
     BTWORD       opcode;
@@ -487,14 +487,14 @@ typedef __packed struct _HCI_STRUCT_REMOTE_EXTENDED_FEATURE_T
     BTWORD       param_handle;
     BTBYTE       param_page;
 } HCI_STRUCT_REMOTE_EXTENDED_FEATURE_T, *HCI_STRUCT_REMOTE_EXTENDED_FEATURE_P;
-typedef __packed struct _HCI_STRUCT_REMOTE_VERSION_INFORMATION_T
+typedef struct __packed _HCI_STRUCT_REMOTE_VERSION_INFORMATION_T
 {
     BTCHAR       packet;
     BTWORD       opcode;
     BTBYTE       length;
     BTWORD       param_handle;
 } HCI_STRUCT_REMOTE_VERSION_INFORMATION_T, *HCI_STRUCT_REMOTE_VERSION_INFORMATION_P;
-typedef __packed struct _HCI_STRUCT_IO_CAPABILITY_REPLY_T
+typedef struct __packed _HCI_STRUCT_IO_CAPABILITY_REPLY_T
 {
     BTCHAR       packet;
     BTWORD       opcode;
@@ -504,7 +504,7 @@ typedef __packed struct _HCI_STRUCT_IO_CAPABILITY_REPLY_T
     BTBYTE       param_oob_data_present;
     BTBYTE       param_req_authentication;
 } HCI_STRUCT_IO_CAPABILITY_REPLY_T, *HCI_STRUCT_IO_CAPABILITY_REPLY_P;
-typedef __packed struct _HCI_STRUCT_IO_CAPABILITY_NEGATIVE_REPLY_T
+typedef struct __packed _HCI_STRUCT_IO_CAPABILITY_NEGATIVE_REPLY_T
 {
     BTCHAR       packet;
     BTWORD       opcode;
@@ -512,21 +512,21 @@ typedef __packed struct _HCI_STRUCT_IO_CAPABILITY_NEGATIVE_REPLY_T
     DEV_MEM_ADDR param_dev_mem_addr;
     BTBYTE       param_reason;
 } HCI_STRUCT_IO_CAPABILITY_NEGATIVE_REPLY_T, *HCI_STRUCT_IO_CAPABILITY_NEGATIVE_REPLY_P;
-typedef __packed struct _HCI_STRUCT_USER_CONFIRMATION_REPLY_T
+typedef struct __packed _HCI_STRUCT_USER_CONFIRMATION_REPLY_T
 {
     BTCHAR       packet;
     BTWORD       opcode;
     BTBYTE       length;
     DEV_MEM_ADDR param_dev_mem_addr;
 } HCI_STRUCT_USER_CONFIRMATION_REPLY_T, *HCI_STRUCT_USER_CONFIRMATION_REPLY_P;
-typedef __packed struct _HCI_STRUCT_USER_CONFIRMATION_NEGATIVE_REPLY_T
+typedef struct __packed _HCI_STRUCT_USER_CONFIRMATION_NEGATIVE_REPLY_T
 {
     BTCHAR       packet;
     BTWORD       opcode;
     BTBYTE       length;
     DEV_MEM_ADDR param_dev_mem_addr;
 } HCI_STRUCT_USER_CONFIRMATION_NEGATIVE_REPLY_T, *HCI_STRUCT_USER_CONFIRMATION_NEGATIVE_REPLY_P;
-typedef __packed struct _HCI_STRUCT_USER_PASSKEY_REPLY_T
+typedef struct __packed _HCI_STRUCT_USER_PASSKEY_REPLY_T
 {
     BTCHAR       packet;
     BTWORD       opcode;
@@ -534,14 +534,14 @@ typedef __packed struct _HCI_STRUCT_USER_PASSKEY_REPLY_T
     DEV_MEM_ADDR param_dev_mem_addr;
     BTDWORD       param_numeric;
 } HCI_STRUCT_USER_PASSKEY_REPLY_T, *HCI_STRUCT_USER_PASSKEY_REPLY_P;
-typedef __packed struct _HCI_STRUCT_USER_PASSKEY_NEGATIVE_REPLY_T
+typedef struct __packed _HCI_STRUCT_USER_PASSKEY_NEGATIVE_REPLY_T
 {
     BTCHAR       packet;
     BTWORD       opcode;
     BTBYTE       length;
     DEV_MEM_ADDR param_dev_mem_addr;
 } HCI_STRUCT_USER_PASSKEY_NEGATIVE_REPLY_T, *HCI_STRUCT_USER_PASSKEY_NEGATIVE_REPLY_P;
-typedef __packed struct _HCI_STRUCT_REMOTE_OOB_DATA_REPLY_T
+typedef struct __packed _HCI_STRUCT_REMOTE_OOB_DATA_REPLY_T
 {
     BTCHAR       packet;
     BTWORD       opcode;
@@ -550,14 +550,14 @@ typedef __packed struct _HCI_STRUCT_REMOTE_OOB_DATA_REPLY_T
     BTBYTE       param_c[0x10];
     BTBYTE       param_r[0x10];
 } HCI_STRUCT_REMOTE_OOB_DATA_REPLY_T, *HCI_STRUCT_REMOTE_OOB_DATA_REPLY_P;
-typedef __packed struct _HCI_STRUCT_REMOTE_OOB_DATA_NEGATIVE_REPLY_T
+typedef struct __packed _HCI_STRUCT_REMOTE_OOB_DATA_NEGATIVE_REPLY_T
 {
     BTCHAR       packet;
     BTWORD       opcode;
     BTBYTE       length;
     DEV_MEM_ADDR param_dev_mem_addr;
 } HCI_STRUCT_REMOTE_OOB_DATA_NEGATIVE_REPLY_T, *HCI_STRUCT_REMOTE_OOB_DATA_NEGATIVE_REPLY_P;
-typedef __packed struct _HCI_STRUCT_SWITCH_ROLE_T
+typedef struct __packed _HCI_STRUCT_SWITCH_ROLE_T
 {
     BTCHAR       packet;
     BTWORD       opcode;
@@ -565,13 +565,13 @@ typedef __packed struct _HCI_STRUCT_SWITCH_ROLE_T
     DEV_MEM_ADDR param_dev_mem_addr;
     BTBYTE param_role;
 } HCI_STRUCT_SWITCH_ROLE_T, *HCI_STRUCT_SWITCH_ROLE_P;
-typedef __packed struct _HCI_STRUCT_RESET_T
+typedef struct __packed _HCI_STRUCT_RESET_T
 {
     BTCHAR       packet;
     BTWORD       opcode;
     BTBYTE       length;
 } HCI_STRUCT_RESET_T, *HCI_STRUCT_RESET_P;
-typedef __packed struct _HCI_STRUCT_READ_STORED_LINK_KEY_T
+typedef struct __packed _HCI_STRUCT_READ_STORED_LINK_KEY_T
 {
     BTCHAR       packet;
     BTWORD       opcode;
@@ -579,7 +579,7 @@ typedef __packed struct _HCI_STRUCT_READ_STORED_LINK_KEY_T
     DEV_MEM_ADDR param_dev_mem_addr;
     BTBYTE       param_read_all_flag;
 } HCI_STRUCT_READ_STORED_LINK_KEY_T, *HCI_STRUCT_READ_STORED_LINK_KEY_P;
-typedef __packed struct _HCI_STRUCT_WRITE_STORED_LINK_KEY_T
+typedef struct __packed _HCI_STRUCT_WRITE_STORED_LINK_KEY_T
 {
     BTCHAR       packet;
     BTWORD       opcode;
@@ -588,20 +588,20 @@ typedef __packed struct _HCI_STRUCT_WRITE_STORED_LINK_KEY_T
     DEV_MEM_ADDR param_dev_mem_addr;
     DEV_LINK_KEY param_dev_link_key;
 } HCI_STRUCT_WRITE_STORED_LINK_KEY_T, *HCI_STRUCT_WRITE_STORED_LINK_KEY_P;
-typedef __packed struct _HCI_STRUCT_DELETE_STORED_LINK_KEY_T
+typedef struct __packed _HCI_STRUCT_DELETE_STORED_LINK_KEY_T
 {
     BTCHAR       packet;
     BTWORD       opcode;
     BTBYTE       length;
     DEV_MEM_ADDR param_dev_mem_addr;
 } HCI_STRUCT_DELETE_STORED_LINK_KEY_T, *HCI_STRUCT_DELETE_STORED_LINK_KEY_P;
-typedef __packed struct _HCI_STRUCT_READ_LOCAL_NAME_T
+typedef struct __packed _HCI_STRUCT_READ_LOCAL_NAME_T
 {
     BTCHAR       packet;
     BTWORD       opcode;
     BTBYTE       length;
 } HCI_STRUCT_READ_LOCAL_NAME_T, *HCI_STRUCT_READ_LOCAL_NAME_P;
-typedef __packed struct _HCI_STRUCT_WRITE_LOCAL_NAME_T
+typedef struct __packed _HCI_STRUCT_WRITE_LOCAL_NAME_T
 {
     BTCHAR       packet;
     BTWORD       opcode;
@@ -610,39 +610,39 @@ typedef __packed struct _HCI_STRUCT_WRITE_LOCAL_NAME_T
     DEV_MEM_NAME param_local_name;
 #endif
 } HCI_STRUCT_WRITE_LOCAL_NAME_T, *HCI_STRUCT_WRITE_LOCAL_NAME_P;
-typedef __packed struct _HCI_STRUCT_READ_SCAN_ENABLE_T
+typedef struct __packed _HCI_STRUCT_READ_SCAN_ENABLE_T
 {
     BTCHAR       packet;
     BTWORD       opcode;
     BTBYTE       length;
 } HCI_STRUCT_READ_SCAN_ENABLE_T, *HCI_STRUCT_READ_SCAN_ENABLE_P;
-typedef __packed struct _HCI_STRUCT_WRITE_SCAN_ENABLE_T
+typedef struct __packed _HCI_STRUCT_WRITE_SCAN_ENABLE_T
 {
     BTCHAR       packet;
     BTWORD       opcode;
     BTBYTE       length;
     BTBYTE       param_scan_enable;
 } HCI_STRUCT_WRITE_SCAN_ENABLE_T, *HCI_STRUCT_WRITE_SCAN_ENABLE_P;
-typedef __packed struct _HCI_STRUCT_READ_CLASS_OF_DEVICE_T
+typedef struct __packed _HCI_STRUCT_READ_CLASS_OF_DEVICE_T
 {
     BTCHAR       packet;
     BTWORD       opcode;
     BTBYTE       length;
 } HCI_STRUCT_READ_CLASS_OF_DEVICE_T, *HCI_STRUCT_READ_CLASS_OF_DEVICE_P;
-typedef __packed struct _HCI_STRUCT_WRITE_CLASS_OF_DEVICE_T
+typedef struct __packed _HCI_STRUCT_WRITE_CLASS_OF_DEVICE_T
 {
     BTCHAR       packet;
     BTWORD       opcode;
     BTBYTE       length;
     DEV_MEM_TYPE param_cod;
 } HCI_STRUCT_WRITE_CLASS_OF_DEVICE_T, *HCI_STRUCT_WRITE_CLASS_OF_DEVICE_P;
-typedef __packed struct _HCI_STRUCT_READ_CURRENT_IAC_LAP_T
+typedef struct __packed _HCI_STRUCT_READ_CURRENT_IAC_LAP_T
 {
     BTCHAR       packet;
     BTWORD       opcode;
     BTBYTE       length;
 } HCI_STRUCT_READ_CURRENT_IAC_LAP_T, *HCI_STRUCT_READ_CURRENT_IAC_LAP_P;
-typedef __packed struct _HCI_STRUCT_WRITE_CURRENT_IAC_LAP_T
+typedef struct __packed _HCI_STRUCT_WRITE_CURRENT_IAC_LAP_T
 {
     BTCHAR       packet;
     BTWORD       opcode;
@@ -650,77 +650,77 @@ typedef __packed struct _HCI_STRUCT_WRITE_CURRENT_IAC_LAP_T
     BTBYTE       param_num;
     BTBYTE       param_lap[0x03];
 } HCI_STRUCT_WRITE_CURRENT_IAC_LAP_T, *HCI_STRUCT_WRITE_CURRENT_IAC_LAP_P;
-typedef __packed struct _HCI_STRUCT_READ_INQUIRY_SCAN_TYPE_T
+typedef struct __packed _HCI_STRUCT_READ_INQUIRY_SCAN_TYPE_T
 {
     BTCHAR       packet;
     BTWORD       opcode;
     BTBYTE       length;
 } HCI_STRUCT_READ_INQUIRY_SCAN_TYPE_T, *HCI_STRUCT_READ_INQUIRY_SCAN_TYPE_P;
-typedef __packed struct _HCI_STRUCT_WRITE_INQUIRY_SCAN_TYPE_T
+typedef struct __packed _HCI_STRUCT_WRITE_INQUIRY_SCAN_TYPE_T
 {
     BTCHAR       packet;
     BTWORD       opcode;
     BTBYTE       length;
     BTBYTE       param_type;
 } HCI_STRUCT_WRITE_INQUIRY_SCAN_TYPE_T, *HCI_STRUCT_WRITE_INQUIRY_SCAN_TYPE_P;
-typedef __packed struct _HCI_STRUCT_READ_INQUIRY_MODE_T
+typedef struct __packed _HCI_STRUCT_READ_INQUIRY_MODE_T
 {
     BTCHAR       packet;
     BTWORD       opcode;
     BTBYTE       length;
 } HCI_STRUCT_READ_INQUIRY_MODE_T, *HCI_STRUCT_READ_INQUIRY_MODE_P;
-typedef __packed struct _HCI_STRUCT_WRITE_INQUIRY_MODE_T
+typedef struct __packed _HCI_STRUCT_WRITE_INQUIRY_MODE_T
 {
     BTCHAR       packet;
     BTWORD       opcode;
     BTBYTE       length;
     BTBYTE       param_mode;
 } HCI_STRUCT_WRITE_INQUIRY_MODE_T, *HCI_STRUCT_WRITE_INQUIRY_MODE_P;
-typedef __packed struct _HCI_STRUCT_READ_PAGE_SCAN_TYPE_T
+typedef struct __packed _HCI_STRUCT_READ_PAGE_SCAN_TYPE_T
 {
     BTCHAR       packet;
     BTWORD       opcode;
     BTBYTE       length;
 } HCI_STRUCT_READ_PAGE_SCAN_TYPE_T, *HCI_STRUCT_READ_PAGE_SCAN_TYPE_P;
-typedef __packed struct _HCI_STRUCT_WRITE_PAGE_SCAN_TYPE_T
+typedef struct __packed _HCI_STRUCT_WRITE_PAGE_SCAN_TYPE_T
 {
     BTCHAR       packet;
     BTWORD       opcode;
     BTBYTE       length;
     BTBYTE       param_type;
 } HCI_STRUCT_WRITE_PAGE_SCAN_TYPE_T, *HCI_STRUCT_WRITE_PAGE_SCAN_TYPE_P;
-typedef __packed struct _HCI_STRUCT_READ_VERSION_INFORMATION_T
+typedef struct __packed _HCI_STRUCT_READ_VERSION_INFORMATION_T
 {
     BTCHAR       packet;
     BTWORD       opcode;
     BTBYTE       length;
 } HCI_STRUCT_READ_VERSION_INFORMATION_T, *HCI_STRUCT_READ_VERSION_INFORMATION_P;
-typedef __packed struct _HCI_STRUCT_READ_SUPPORTED_COMMANDS_T
+typedef struct __packed _HCI_STRUCT_READ_SUPPORTED_COMMANDS_T
 {
     BTCHAR       packet;
     BTWORD       opcode;
     BTBYTE       length;
 } HCI_STRUCT_READ_SUPPORTED_COMMANDS_T, *HCI_STRUCT_READ_SUPPORTED_COMMANDS_P;
-typedef __packed struct _HCI_STRUCT_READ_SUPPORTED_FEATURES_T
+typedef struct __packed _HCI_STRUCT_READ_SUPPORTED_FEATURES_T
 {
     BTCHAR       packet;
     BTWORD       opcode;
     BTBYTE       length;
 } HCI_STRUCT_READ_SUPPORTED_FEATURES_T, *HCI_STRUCT_READ_SUPPORTED_FEATURES_P;
-typedef __packed struct _HCI_STRUCT_READ_EXTENDED_FEATURES_T
+typedef struct __packed _HCI_STRUCT_READ_EXTENDED_FEATURES_T
 {
     BTCHAR       packet;
     BTWORD       opcode;
     BTBYTE       length;
     BTBYTE       param_page;
 } HCI_STRUCT_READ_EXTENDED_FEATURES_T, *HCI_STRUCT_READ_EXTENDED_FEATURES_P;
-typedef __packed struct _HCI_STRUCT_READ_BUFFER_SIZE_T
+typedef struct __packed _HCI_STRUCT_READ_BUFFER_SIZE_T
 {
     BTCHAR       packet;
     BTWORD       opcode;
     BTBYTE       length;
 } HCI_STRUCT_READ_BUFFER_SIZE_T, *HCI_STRUCT_READ_BUFFER_SIZE_P;
-typedef __packed struct _HCI_STRUCT_WRITE_LINK_SUPERVISION_TIMEOUT_T
+typedef struct __packed _HCI_STRUCT_WRITE_LINK_SUPERVISION_TIMEOUT_T
 {
     BTCHAR       packet;
     BTWORD       opcode;
@@ -728,40 +728,40 @@ typedef __packed struct _HCI_STRUCT_WRITE_LINK_SUPERVISION_TIMEOUT_T
     BTWORD       param_handles;
     BTWORD       param_timeout;
 } HCI_STRUCT_WRITE_LINK_SUPERVISION_TIMEOUT_T, *HCI_STRUCT_WRITE_LINK_SUPERVISION_TIMEOUT_P;
-typedef __packed struct _HCI_STRUCT_READ_DEV_ADDR_T
+typedef struct __packed _HCI_STRUCT_READ_DEV_ADDR_T
 {
     BTCHAR       packet;
     BTWORD       opcode;
     BTBYTE       length;
 } HCI_STRUCT_READ_DEV_ADDR_T, *HCI_STRUCT_READ_DEV_ADDR_P;
-typedef __packed struct _HCI_STRUCT_READ_LINK_QUALITY_T
+typedef struct __packed _HCI_STRUCT_READ_LINK_QUALITY_T
 {
     BTCHAR       packet;
     BTWORD       opcode;
     BTBYTE       length;
     BTWORD       param_handle;
 } HCI_STRUCT_READ_LINK_QUALITY_T, *HCI_STRUCT_READ_LINK_QUALITY_P;
-typedef __packed struct _HCI_STRUCT_READ_RSSI_T
+typedef struct __packed _HCI_STRUCT_READ_RSSI_T
 {
     BTCHAR       packet;
     BTWORD       opcode;
     BTBYTE       length;
     BTWORD       param_handle;
 } HCI_STRUCT_READ_RSSI_T, *HCI_STRUCT_READ_RSSI_P;
-typedef __packed struct _HCI_STRUCT_READ_SIMPLE_PARING_MODE_T
+typedef struct __packed _HCI_STRUCT_READ_SIMPLE_PARING_MODE_T
 {
     BTCHAR       packet;
     BTWORD       opcode;
     BTBYTE       length;
 } HCI_STRUCT_READ_SIMPLE_PARING_MODE_T, *HCI_STRUCT_READ_SIMPLE_PARING_MODE_P;
-typedef __packed struct _HCI_STRUCT_WRITE_SIMPLE_PARING_MODE_T
+typedef struct __packed _HCI_STRUCT_WRITE_SIMPLE_PARING_MODE_T
 {
     BTCHAR       packet;
     BTWORD       opcode;
     BTBYTE       length;
     BTBYTE       param_mode;
 } HCI_STRUCT_WRITE_SIMPLE_PARING_MODE_T, *HCI_STRUCT_WRITE_SIMPLE_PARING_MODE_P;
-typedef __packed struct _HCI_STRUCT_WRITE_LINK_POLICY_SET_T
+typedef struct __packed _HCI_STRUCT_WRITE_LINK_POLICY_SET_T
 {
     BTCHAR       packet;
     BTWORD       opcode;
@@ -769,7 +769,7 @@ typedef __packed struct _HCI_STRUCT_WRITE_LINK_POLICY_SET_T
     BTWORD       param_handles;
     BTWORD       policy_settings;
 } HCI_STRUCT_WRITE_LINK_POLICY_SET_T,*HCI_STRUCT_WRITE_LINK_POLICY_SET_P;
-typedef __packed union _HCI_COMMAND_T
+typedef union __packed _HCI_COMMAND_T
 {
     HCI_STRUCT_INQUIRY_T                                    Inquiry;
     HCI_STRUCT_INQUIRY_CANCEL_T                             InquiryCancel;

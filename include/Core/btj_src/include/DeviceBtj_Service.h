@@ -16,7 +16,7 @@ typedef enum
 #elif defined(ARM_PLATFORM)
 #pragma pack(1)
 #endif
-__packed struct __DEVICEBTJ_SERVICE_T
+struct __packed __DEVICEBTJ_SERVICE_T
 {
     BTBYTE        ctx_state;
     DEV_MEM_ADDR  dev_mem_addr;

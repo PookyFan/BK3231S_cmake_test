@@ -53,7 +53,7 @@ typedef enum
 #elif defined(ARM_PLATFORM)
 #pragma pack(1)
 #endif
-typedef __packed struct _HID_CONTEXT_T
+typedef struct __packed _HID_CONTEXT_T
 {
     BTBYTE hid_report;
     BTBYTE hid_protocol;
@@ -65,7 +65,7 @@ typedef __packed struct _HID_CONTEXT_T
     L2C_CONTEXT_P l2c_context_interrupt;
     DEVICEBTJ_SERVICE_P app_service_header;
 } HID_CONTEXT_T, *HID_CONTEXT_P;
-typedef __packed struct _HID_HEADER_T
+typedef struct __packed _HID_HEADER_T
 {
     unsigned char trans_param: 4;
     unsigned char trans_type: 4;

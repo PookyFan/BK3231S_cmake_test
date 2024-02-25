@@ -1,9 +1,15 @@
 #include"include.h"
 #include "DeviceBtj_Header.h"
 #include"DeviceBtj_Handler.h"
+#include "driver_adc.h"
+
 #define SCAN_COUT 0x03
 
 MOUSE_VARIABLE_T mouse_val;
+
+void gpio_sleep();
+uint8 ADC_Get_Value(void);
+void Enter_Deep_sleep(void);
 
 u_int8 bt_tx_buff[6][10],tx_buff_len[6];
 u_int8 tx_buff_head,tx_buff_tail,tx_buff_count,enter_pair_count;

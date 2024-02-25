@@ -33,23 +33,23 @@ typedef enum _KEY_ACTION
 #elif defined(ARM_PLATFORM)
 #pragma pack(1)
 #endif
-typedef __packed struct _USB_CONTEXT
+typedef struct __packed _USB_CONTEXT
 {
     BTPVOID             usb_stack;
 } USB_CONTEXT_T;
-typedef __packed struct _COM_CONTEXT
+typedef struct __packed _COM_CONTEXT
 {
     BTPVOID             com_stack;
 } COM_CONTEXT_T;
-typedef __packed struct _LMP_FEATURE_T
+typedef struct __packed _LMP_FEATURE_T
 {
     BTBYTE              lmp_feature[DEVICELEN_LMP_FEATURE];
 } LMP_FEATURE_T, *LMP_FEATURE_P;
-typedef __packed struct _CMD_FEATURE_T
+typedef struct __packed _CMD_FEATURE_T
 {
     BTBYTE              cmd_feature[DEVICELEN_CMD_FEATURE];
 } CMD_FEATURE_T, *CMD_FEATURE_P;
-typedef __packed struct _INQ_CONTEXT_T
+typedef struct __packed _INQ_CONTEXT_T
 {
     DEV_MEM_ADDR        dev_mem_addr;
     DEV_MEM_TYPE        dev_mem_type;
@@ -57,18 +57,18 @@ typedef __packed struct _INQ_CONTEXT_T
     BTBYTE              dev_count;
     struct _INQ_CONTEXT_T *next;
 } INQ_CONTEXT_T, *INQ_CONTEXT_P;
-typedef __packed struct _PIN_CONTEXT_T
+typedef struct __packed _PIN_CONTEXT_T
 {
     BTBYTE              pin_length;
     BTBYTE              pin_buffer[MAX_PIN_CODE];
 } PIN_CONTEXT_T, *PIN_CONTEXT_P;
-typedef __packed struct _KEY_CONTEXT_T
+typedef struct __packed _KEY_CONTEXT_T
 {
     BTBYTE              key_action;
     DEV_MEM_ADDR        key_mem_addr;
     BTBYTE              key_link_key[LEN_DEV_LINK_KEY];
 } KEY_CONTEXT_T, *KEY_CONTEXT_P;
-__packed struct __DEVICEBTJ_ADAPTER_T
+struct __packed __DEVICEBTJ_ADAPTER_T
 {
     /* rnr is short for RemoteNameRequest */
     BTBYTE              rnr_statusx;

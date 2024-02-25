@@ -158,7 +158,6 @@
  * Host Controller Configuration Options that are normally fixed for normal
  * HC Builds
  */
-#define NDEBUG 0
 #define STATIC static
 
 /*

@@ -22,7 +22,7 @@
 #elif defined(ARM_PLATFORM)
 #pragma pack(1)
 #endif
-typedef __packed struct _SDP_HEADERS_T
+typedef struct __packed _SDP_HEADERS_T
 {
     BTBYTE sdp_pdu_id;
     BTWORD sdp_trans_id;
