@@ -465,7 +465,7 @@ void SYSirq_Enable_Interrupts_Save_Flags(u_int32 *flags)
     asm volatile (
         "MRS %0, CPSR\n"
         "BIC %0, %0, #0xC0\n"
-        "MSR CPSR, %0"
+        "MSR CPSR_c, %0"
         : "=r" (tmp_flags)
     );
 #endif

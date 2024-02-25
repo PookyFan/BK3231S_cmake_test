@@ -21,6 +21,7 @@ _isr_invalid:
 .equ MODE_SYS, 0xDF
 
 _stack_init:
+    MOV R5, LR
     LDR R4, =0xDEADBEEF @todo: init stacks elsewhere
 
     MOV R0, #MODE_IRQ
@@ -43,6 +44,7 @@ _stack_init:
     LDR SP, =_sys_stack_top
     STR R4, [SP]
 
+    MOV LR, R5
     BX LR
 
 .end
