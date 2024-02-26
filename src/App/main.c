@@ -7,15 +7,18 @@
 #include "bt_test_impl.h"
 #include "DeviceBtj_Header.h"
 #include "bt_mini_sched.h"
-
+#include "lmp_scan.h"
 
 u_int8 bd_addr[6]={0x13,0x15,0x56,0xac,0xad,0xae};
 u_int8 env_config_buff[sizeof(ENV_CONFIG_T)];
 u_int8 spiCount = 0;
 u_int8 templata = 0;
 
+unsigned int heartbeat_counter = 0;
+volatile unsigned int irq_counter = 0;
+volatile unsigned int fiq_counter = 0;
 
-void delay_us(uint32 num)
+void __attribute__((optimize("O0"))) delay_us(uint32 num)
 {
     //for 48M clock
     //100=12.5us
@@ -30,7 +33,7 @@ void delay_us(uint32 num)
     for(i=0;i<num;i++)
         for(j=0;j<3;j++);
 }
-void delay_for_32k(uint32 num)
+void __attribute__((optimize("O0"))) delay_for_32k(uint32 num)
 {
     //for 32.768 clock 
     //num=1; 0.25ms 
@@ -49,8 +52,6 @@ void  enter_single_carry(uint8 channel)
     while(1);   
 }
 
-
-
 void read_env_config()
 {
     ENV_CONFIG_P env_config=(ENV_CONFIG_P)env_config_buff;
@@ -59,8 +60,6 @@ void read_env_config()
     flash_set_line_mode(4);
     memcpy(bd_addr,&env_config->bt_addr,6);
 }
-
-
 
 void SYS_Initialise(void)
 {
@@ -110,9 +109,17 @@ void SYS_Initialise(void)
 
 void host_contrl(void)
 {
+    if(++heartbeat_counter == 0x8000)
+    {
+        unsigned int irqc = irq_counter;
+        unsigned int fiqc = fiq_counter;
+        irq_counter = fiq_counter = 0;
+        heartbeat_counter = 0;
+        bprintf("HEARTBEAT - IRQs: %d, FIQs: %d\n", irqc, fiqc);
+    }
     //ENV_CONFIG_P config=(ENV_CONFIG_P)env_config_buff;
 
-	spiCount++;
+//	spiCount++;
 	
 	Host_Loop();
 
@@ -153,5 +160,3 @@ int FAST_CALL main(void)
         } 
     }
 }
-
-

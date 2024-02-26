@@ -24,8 +24,8 @@
 #include "sys_config.h"
 #include "hw_jalapeno.h"                   /*Dedicated to hardware platform */
 
-__IRQ__ void SYSirq_IRQ_Handler(void);
-__IRQ__ void SYSirq_FIQ_Handler(void);
+__attribute__((interrupt("IRQ"))) void SYSirq_IRQ_Handler(void);
+__attribute__((interrupt("FIQ"))) void SYSirq_FIQ_Handler(void);
 void SYSirq_Install_Handlers(void);
 
 void SYSirq_FIQ_Stack_Setup(void);
@@ -41,6 +41,7 @@ void SYSirq_Interrupts_Restore_Flags(u_int32 flags);
 void SYSirq_Disable_Baseband_ISR_Save_Flags(u_int32 *flags);
 void SYSirq_Enable_Baseband_ISR_Save_Flags(u_int32 *flags);
 void SYSirq_Baseband_ISR_Restore_Flags(u_int32 flags);
+void ARM_Enter_Light_mode(void);
 
 #if (PRH_BS_DEV_USE_DELAYED_SERVICE_ROUTINES == 1)
 void SYSirq_IRQ_Tabasco_ISR(void);

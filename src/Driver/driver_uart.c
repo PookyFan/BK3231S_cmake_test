@@ -212,7 +212,7 @@ signed int bprintf(const char *fmt, ...)
 {
 #ifdef UART_LOG_P
 
-    char buf[64];
+    char buf[128];
     signed int rc; 
     va_list args; 
     va_start(args, fmt); 

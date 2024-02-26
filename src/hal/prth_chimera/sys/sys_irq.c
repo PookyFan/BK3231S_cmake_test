@@ -69,16 +69,19 @@ extern volatile u_int8 flag_system_active;
 extern volatile u_int8 flag_key_down;
 extern volatile u_int8 b_26M_colsed;
 
+extern volatile unsigned int irq_counter;
+extern volatile unsigned int fiq_counter;
+
 /******************************************************************************
  *
  * FUNCTION:  SYSirq_IRQ_Handler
  * PURPOSE:   Services slow interrupt requests to micro-controller
  *
  ******************************************************************************/
-__IRQ__ void FAST_CALL SYSirq_FIQ_Handler(void)//FIQ_Exception(void) 
+void FAST_CALL SYSirq_FIQ_Handler(void)//FIQ_Exception(void) 
 {
     unsigned int IntStat ;
-    
+    ++fiq_counter;
     IntStat = REG_AHB0_ICU_INT_STATUS_FLAG;
     
     
@@ -106,17 +109,17 @@ __IRQ__ void FAST_CALL SYSirq_FIQ_Handler(void)//FIQ_Exception(void)
 }
 //=======================================================================
 //=======================================================================
-__IRQ__  void SYSirq_IRQ_Handler(void)//IRQ_Exception(void)
+void SYSirq_IRQ_Handler(void)//IRQ_Exception(void)
 {
     unsigned int IntStat;
-    
+    ++irq_counter;
     IntStat = REG_AHB0_ICU_INT_STATUS_FLAG;
-    /*
+    
     if(IntStat & INT_STATUS_UART)          //Uart1 Int Assert
     {
         UART_Interrupt_Handler();
     }
-	*/
+	
     if(IntStat & INT_STATUS_TIMER)
     {
         
@@ -411,12 +414,15 @@ void SYSirq_Disable_Interrupts_Save_Flags(u_int32 *flags)
     }
 #else
     /* GNU C inline asm? */
-    u_int32 tmp_flags;
     asm volatile (
-        "MRS %0, CPSR\n"
-        "ORR %0, %0, #0xC0\n"
-        "MSR CPSR_c, %0"
-        : "=r" (tmp_flags)
+        "MRS r1, CPSR\n"
+        "AND r2, r1, #0xc0\n"
+        "STR r2, [%0]\n"
+        "ORR r1, r1, #0xC0\n"
+        "MSR CPSR_c, r1"
+        :
+        : "r" (flags)
+        : "r1", "r2"
     );
 #endif
 }
@@ -437,6 +443,16 @@ void SYSirq_Disable_Interrupts_Only_IRQ_Save_Flags(u_int32 *flags)
     }
 #else
     /* GNU C inline asm? */
+    asm volatile (
+        "MRS r1, CPSR\n"
+        "AND r2, r1, #0xc0\n"
+        "STR r2, [%0]\n"
+        "ORR r1, r1, #0x80\n"
+        "MSR CPSR_c, r1"
+        :
+        : "r" (flags)
+        : "r1", "r2"
+    );
 #endif
 }
 
@@ -461,12 +477,15 @@ void SYSirq_Enable_Interrupts_Save_Flags(u_int32 *flags)
     }
 #else
     /* GNU C inline asm? */
-    u_int32 tmp_flags;
     asm volatile (
-        "MRS %0, CPSR\n"
-        "BIC %0, %0, #0xC0\n"
-        "MSR CPSR_c, %0"
-        : "=r" (tmp_flags)
+        "MRS r1, CPSR\n"
+        "AND r2, r1, #0xc0\n"
+        "STR r2, [%0]\n"
+        "BIC r1, r1, #0xC0\n"
+        "MSR CPSR_c, r1"
+        :
+        : "r" (flags)
+        : "r1", "r2"
     );
 #endif
 }
@@ -490,6 +509,15 @@ void SYSirq_Interrupts_Restore_Flags(u_int32 flags)
     }
 #else
     /* GNU C inline asm? */
+    asm volatile (
+        "MRS r1, CPSR\n"
+        "BIC r1, r1, #0xC0\n"
+        "ORR r1, r1, %0\n"
+        "MSR CPSR_c, r1"
+        :
+        : "r" (flags)
+        : "r1"
+    );
 #endif
 }
 
@@ -540,6 +568,7 @@ void SYSirq_Disable_Baseband_ISR_Save_Flags(u_int32 *flags)
     }
 #else
     /* GNU C inline asm? */
+    SYSirq_Disable_Interrupts_Only_IRQ_Save_Flags(flags); //It's the same
 #endif
 }
 
@@ -564,6 +593,16 @@ void SYSirq_Enable_Baseband_ISR_Save_Flags(u_int32 *flags)
     }
 #else
     /* GNU C inline asm? */
+    asm volatile (
+        "MRS r1, CPSR\n"
+        "AND r2, r1, #0xc0\n"
+        "STR r2, [%0]\n"
+        "AND r1, r1, #0x7F\n"
+        "MSR CPSR_c, r1"
+        :
+        : "r" (flags)
+        : "r1", "r2"
+    );
 #endif
 }
 
@@ -586,6 +625,15 @@ void SYSirq_Baseband_ISR_Restore_Flags(u_int32 flags)
     }
 #else
     /* GNU C inline asm? */
+    asm volatile (
+        "MRS r1, CPSR\n"
+        "BIC r1, r1, #0x80\n"
+        "ORR r1, r1, %0\n"
+        "MSR CPSR_c, r1"
+        :
+        : "r" (flags)
+        : "r1"
+    );
 #endif
 }
 
