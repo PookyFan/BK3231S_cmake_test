@@ -1,0 +1,6 @@
+# BK3231S SKD (ported to CMAKE project)
+
+This code was ported from [AriesTian's BM3231](https://github.com/AriesTian/BM3231) repository. Most of it remained untouched, only some fixes and changes required for smooth building using GCC were applied (plus some actual code fixes and additional debug measures).
+If you want to use it, build it with CMAKE to generate firmware image (ARM compiler is needed, recommendation is `arm-none-eabi` flavor of GCC). By doing that, three files will appear in `build/bin` directory: an ELF binary (`fw` file), raw binary blob (`fw.bin` file) and encrypted binary with attached default configuration, padded to the size of BK3231S's internal flash memory (`fw.img` file). The last one is the one you'd be using to flash your device.
+
+**As of now, Bluetooth communication doesn't work (JDY-31 module used for tests doesn't appear while looking for BT devices on PC/smartphone). Use it at your own risk, as there is no guarantee for this code to work (properly/at all). Dumping previous firmware before flashing new image is recommended so that you could get back to default working state of device you're going to program using this code.**
